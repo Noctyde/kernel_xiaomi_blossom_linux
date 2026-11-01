@@ -29,7 +29,6 @@
 #include "fstb_usedext.h"
 #include "fpsgo_usedext.h"
 
-extern void ged_kpi_set_target_FPS_margin(int bufid, int target_fps, int margin);
 
 #define API_READY 0
 #if IS_ENABLED(CONFIG_MTK_GPU_SUPPORT)
