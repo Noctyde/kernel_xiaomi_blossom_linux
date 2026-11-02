@@ -2994,7 +2994,7 @@ static int power_misc_routine_thread(void *arg)
 	struct shutdown_controller *sdd = &gm->sdc;
 
 	while (1) {
-		wait_event(sdd->wait_que, (sdd->timeout == true)
+		wait_event_idle(sdd->wait_que, (sdd->timeout == true)
 			|| (sdd->overheat == true));
 		if (sdd->timeout == true) {
 			sdd->timeout = false;
