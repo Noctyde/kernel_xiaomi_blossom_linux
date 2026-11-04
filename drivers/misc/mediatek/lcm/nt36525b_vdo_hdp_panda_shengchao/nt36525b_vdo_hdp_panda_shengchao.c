@@ -317,14 +317,14 @@ static void lcm_get_params(struct LCM_PARAMS *params)
 
 static void lcm_init_power(void)
 {
-	no_printk("[LCM]%s\n",__func__);
+	pr_info("[LCM]%s\n", __func__);
 	lcd_bl_en = 1;
 }
 
 
 static void lcm_suspend_power(void)
 {
-	no_printk("[LCM]%s\n",__func__);
+	pr_info("[LCM]%s\n", __func__);
 
 	disp_dts_gpio_select_state(DTS_GPIO_STATE_LCD_BIAS_ENN0);
 	MDELAY(2);
@@ -334,7 +334,7 @@ static void lcm_suspend_power(void)
 
 static void lcm_resume_power(void)
 {
-	no_printk("[LCM]%s\n",__func__);
+	pr_info("[LCM]%s\n", __func__);
 	disp_dts_gpio_select_state(DTS_GPIO_STATE_LCD_BIAS_ENP1);
 	
 	disp_dts_gpio_select_state(DTS_GPIO_STATE_LCD_BIAS_ENN1);
@@ -352,10 +352,12 @@ static void lcm_init(void)
 	data = 0x13;
 
 	ret = tps65132_write_bytes(cmd, data);
+	pr_info("[LCM]tps65132 reg 0x%x = 0x%x: %d\n", cmd, data, ret);
 	cmd = 0x01;
 	data = 0x13;
 
 	ret = tps65132_write_bytes(cmd, data);
+	pr_info("[LCM]tps65132 reg 0x%x = 0x%x: %d\n", cmd, data, ret);
 	MDELAY(4);
 	disp_dts_gpio_select_state(DTS_GPIO_STATE_LCM_RST_OUT0);
 	
@@ -375,7 +377,7 @@ static void lcm_init(void)
 
 static void lcm_suspend(void)
 {
-	no_printk("[LCM]%s\n",__func__);
+	pr_info("[LCM]%s\n", __func__);
 	push_table(lcm_suspend_setting,
 		sizeof(lcm_suspend_setting) / sizeof(struct LCM_setting_table),
 			1);
@@ -383,7 +385,7 @@ static void lcm_suspend(void)
 
 static void lcm_resume(void)
 {
-	no_printk("[LCM]%s\n",__func__);
+	pr_info("[LCM]%s\n", __func__);
 	lcm_init();
 }
 
